@@ -31,7 +31,7 @@ jobs:
           git checkout -b failure-branch-${{ github.run_id }}
           git add .
           git commit -m "Test failure"
-          git push --set-upstream origin failure-branch-${{ github.run_id }}
+          git push origin failure-branch-${{ github.run_id }}
       - name: Git reset
         if: ${{ failure() }}
         run: git reset --hard HEAD@{1}
