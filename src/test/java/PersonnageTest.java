@@ -29,7 +29,7 @@ public class PersonnageTest {
         // Vérifier si la cible est morte
         //assertEquals(true,cible.est_Mort());
         assertEquals(40,cible.getPoints());
-        // assertTrue("est ce cible est morte",cible.est_Mort());
+        assertTrue("est ce cible est morte",cible.est_Mort());
 
 
     }
