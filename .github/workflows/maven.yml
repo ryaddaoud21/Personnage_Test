@@ -22,4 +22,19 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Run tests
         run: mvn test
-
+      - name: Check test results
+        if: ${{ failure() }}
+        run: echo "Tests failed!"
+      - name: Create failure branch
+        if: ${{ failure() }}
+        run: |
+          git checkout -b failure-branch-${{ github.run_id }}
+          git add .
+          git commit -m "Test failure"
+          git push --set-upstream origin failure-branch-${{ github.run_id }}
+      - name: Git reset
+        if: ${{ always() }}
+        run: git reset --hard HEAD@{1}
+      - name: Fast forward
+        if: ${{ always() }}
+        run: git pull --ff-only
